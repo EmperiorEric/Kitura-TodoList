@@ -19,7 +19,7 @@ struct TodoItem {
     /// ID
     var id: String = ""
 
-    // Order
+    /// Order
     var order: Int = 0
 
     /// Text to display

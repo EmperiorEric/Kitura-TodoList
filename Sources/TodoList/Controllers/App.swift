@@ -26,9 +26,9 @@ import SwiftyJSON
 */
 class AllRemoteOriginMiddleware: RouterMiddleware {
     func handle(request: RouterRequest, response: RouterResponse, next: () -> Void) {
-
-        response.setHeader("Access-Control-Allow-Origin", value: "*")
-
+        
+        response.headers.append("Access-Control-Allow-Origin", value: "*")
+        
         next()
     }
 }
@@ -92,9 +92,7 @@ func setupRoutes(router: Router, todos: TodoCollection) {
                 response.status(.badRequest)
                 return
             }
-
         }
-
     }
 
     /**
@@ -102,15 +100,15 @@ func setupRoutes(router: Router, todos: TodoCollection) {
      */
     router.options("/*") {
         request, response, next in
-
-        response.setHeader("Access-Control-Allow-Headers", value: "accept, content-type")
-        response.setHeader("Access-Control-Allow-Methods", value: "GET,HEAD,POST,DELETE,OPTIONS,PUT,PATCH")
-
+        
+        response.headers.append("Access-Control-Allow-Headers", value: "accept, content-type")
+        response.headers.append("Access-Control-Allow-Methods", value: "GET,HEAD,POST,DELETE,OPTIONS,PUT,PATCH")
+        
         response.status(.OK)
-
+        
         next()
     }
-
+    
     /**
      Add a todo list item
      */
